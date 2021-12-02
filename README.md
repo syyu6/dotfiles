@@ -1,0 +1,2 @@
+# .conifg
+backup my config
