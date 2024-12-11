@@ -1,0 +1,19 @@
+if application "Finder" is not running then
+	return "Finder is not running"
+end if
+
+tell application "Finder"
+	try
+		set currentFolderPath to POSIX path of (folder of the front window as alias)
+	on error
+		return "No Finder window open"
+	end try
+end tell
+tell application "System Events"
+	tell application "WezTerm"
+		activate
+	end tell
+end tell
+
+set command to "/Applications/WezTerm.app/Contents/MacOS/wezterm cli spawn --cwd " & quoted form of currentFolderPath
+do shell script command
